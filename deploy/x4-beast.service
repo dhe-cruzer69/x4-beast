@@ -1,0 +1,25 @@
+[Unit]
+Description=X4 BEAST AI Agent Runtime
+After=network.target
+
+[Service]
+Type=simple
+User=x4
+Group=x4
+WorkingDirectory=/opt/x4-beast
+EnvironmentFile=-/opt/x4-beast/.env
+ExecStart=/opt/x4-beast/.venv/bin/python -m x4_beast serve --host 127.0.0.1 --port 8787
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+# Security hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/x4-beast/data
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

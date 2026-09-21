@@ -1,0 +1,20 @@
+services:
+  x4-beast:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: x4-beast
+    restart: unless-stopped
+    ports:
+      - "${X4_PORT:-8787}:8787"
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+      - ./config:/app/config:ro
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8787/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
