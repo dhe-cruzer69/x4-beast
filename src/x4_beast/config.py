@@ -7,6 +7,11 @@ class Settings(BaseSettings):
     db: str = "./data/x4.db"
     audit_jsonl: str = "./data/audit.jsonl"
 
+    # Beast Mode controls
+    autonomy_level: int = 1          # 0=Observe, 1=Assist, 2=Governed Autopilot, 3=Never
+    autofix_enabled: bool = True     # only applies inside policy bounds
+    prefer_local: bool = True        # hybrid: try local first
+
     ollama_base_url: str = "http://127.0.0.1:11434"
     ollama_model: str = "llama3.2:3b"
 
