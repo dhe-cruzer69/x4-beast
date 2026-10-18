@@ -48,6 +48,27 @@ INTENT → PLAN → POLICY → EXECUTE → OBSERVE → VERIFY → EVIDENCE
 
 ---
 
+<!-- X4-APEX-DIAGRAM-START:x4-beast -->
+
+```mermaid
+flowchart TD
+    USER[User Intent] --> PLAN[Plan and Task Graph]
+    PLAN --> POLICY[Policy and Autonomy Level]
+    POLICY -->|allowed| ROUTE[Local-first Provider and Tool Routing]
+    POLICY -->|approval needed| HUMAN[Human Review]
+    POLICY -->|denied or unknown| STOP[Stop and Record Evidence]
+    HUMAN --> ROUTE
+    ROUTE --> EXEC[Tool Execution]
+    EXEC --> OBS[Observe Output]
+    OBS --> VERIFY[Verify Result]
+    VERIFY -->|validated| DONE[Return Result with Receipt]
+    VERIFY -->|unknown| REVIEW[Human Review]
+    VERIFY -->|failed| RECOVER[Bounded Recovery or Proposed Autofix]
+    RECOVER --> POLICY
+```
+
+<!-- X4-APEX-DIAGRAM-END:x4-beast -->
+
 ## Quick Start
 
 ### Manual
