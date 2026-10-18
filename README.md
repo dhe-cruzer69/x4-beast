@@ -221,23 +221,5 @@ Part of the [X4 / ARIEX4Ops](https://github.com/dhe-cruzer69) portfolio.
 
 > Status: architecture documentation; implementation and deployment claims require independent verification.
 
-```mermaid
-flowchart TB
-  Client([HTTP client]) --> Health[GET /healthz]
-  Client --> Run[Run request]
-  Run --> Validate[Request validation]
-  Validate --> App[FastAPI application]
-  App --> Runtime[Runtime adapter]
-  Runtime --> Policy{Policy decision}
-  Policy -->|deny| Denied[Structured denial]
-  Policy -->|allow| Dispatch[Execution dispatch]
-  Dispatch --> Sandbox[Sandbox adapter]
-  Dispatch --> Scanner[Security scanner adapter]
-  Sandbox --> Result[Response envelope]
-  Scanner --> Result
-  Health --> Status[Health response]
-  Result --> Client
-  Status --> Client
-```
 **Evidence note:** Verify route names, adapter wiring, and deployment health checks against the current code and live endpoint before describing this as deployed.
 
